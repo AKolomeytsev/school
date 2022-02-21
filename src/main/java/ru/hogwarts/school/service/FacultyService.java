@@ -31,4 +31,10 @@ public class FacultyService {
         Collection<Faculty> faculties = repositoryFaculty.findAll();
         return faculties.stream().filter(faculty -> faculty.getColor().equals(color) ).toList();
     }
+
+    public Collection<Faculty> findFacultyByNameIgnoreCaseContains(String name){
+        return repositoryFaculty.findFacultyByNameIgnoreCaseContains(name);
+    }
+
+
 }

@@ -38,4 +38,8 @@ public class FacultyController {
     public Collection<Faculty> getFacultyColor(@PathVariable String color){
         return facultyService.getFacultyColor(color);
     }
+    @GetMapping(path = "name/{name}")
+    public Collection<Faculty> findFacultyByNameIgnoreCaseContains(String name){
+        return facultyService.findFacultyByNameIgnoreCaseContains(name);
+    }
 }
