@@ -38,13 +38,14 @@ public class FacultyController {
     }
 
     @GetMapping(path = "color/{color}")
-    public Collection<Faculty> getFacultyColor(@PathVariable String color){
-        return facultyService.getFacultyColor(color);
+    public ResponseEntity<Collection<Faculty>> getFacultyColor(@PathVariable String color){
+        Collection<Faculty> faculties = facultyService.findByColorIgnoreCaseContains(color);
+        return ResponseEntity.ok(faculties);
     }
 
     @GetMapping(path = "filter")
     public ResponseEntity<Collection<Faculty>> findFacultyByNameIgnoreCaseContains(String name){
-        Collection<Faculty> faculties = facultyService.findFacultyByNameIgnoreCaseContains(name);
+        Collection<Faculty> faculties = facultyService.findByNameIgnoreCaseContains(name);
         return ResponseEntity.ok(faculties);
     }
 }

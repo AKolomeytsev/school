@@ -6,7 +6,6 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("students")
@@ -45,8 +44,9 @@ public class StudentController {
     }
 
     @GetMapping(path = "age/{age}")
-    public Collection<Student> getStudentAge(@PathVariable int age){
-        return studentService.getStudentsAge(age);
+    public ResponseEntity<Collection<Student>> getStudentAge(@PathVariable int age){
+        Collection<Student> students = studentService.getStudentsAge(age);
+        return ResponseEntity.ok(students);
     }
 
 }
