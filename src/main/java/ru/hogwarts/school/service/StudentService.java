@@ -10,8 +10,8 @@ import java.util.Collection;
 public class StudentService {
     private final RepositoryStudent repositoryStudent;
 
-    public StudentService(RepositoryStudent repositoryStudent) {
-        this.repositoryStudent = repositoryStudent;
+    public StudentService(RepositoryStudent student) {
+        this.repositoryStudent = student;
     }
 
     public Student createStudent(Student student){
