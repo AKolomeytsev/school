@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.RepositoryStudent;
@@ -18,7 +19,7 @@ public class StudentService {
         return repositoryStudent.save(student);
     }
 
-    public Student getStudent(Long id){
+    public Student getStudent(PageRequest id){
         return repositoryStudent.findById(id).get();
     }
 
@@ -36,5 +37,17 @@ public class StudentService {
 
     public Collection<Student> findByAgeBetween(int minAge, int maxAge){
         return repositoryStudent.findByAgeBetween(minAge,maxAge);
+    }
+
+    public int getCountStudent(){
+        return repositoryStudent.getCountStudent();
+    }
+
+    public int getAvgAgeStudent(){
+        return repositoryStudent.getAvgAgeStudent();
+    }
+
+    public Collection<Student> getFiveLastStudent(){
+        return repositoryStudent.getFiveLastStudent();
     }
 }

@@ -17,7 +17,7 @@ public class FacultyController {
     }
 
     @GetMapping("{id}")
-    public Faculty getStudent(@PathVariable Long id){
+    public Faculty getStudent(@PathVariable long id){
         return facultyService.getFaculty(id);
     }
 
@@ -32,7 +32,7 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteStudent(@PathVariable Long id){
+    public ResponseEntity deleteStudent(@PathVariable long id){
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }

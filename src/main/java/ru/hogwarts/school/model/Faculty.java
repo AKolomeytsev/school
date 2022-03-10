@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 public class Faculty {
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
     private String name;
     private String color;
 
