@@ -8,7 +8,7 @@ public class Student {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String nane;
     private int age;
     @ManyToOne
@@ -25,7 +25,7 @@ public class Student {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

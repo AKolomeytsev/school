@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Avatar {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String filePath;
     private long fileSize;
     private String mediaType;
@@ -15,7 +15,7 @@ public class Avatar {
     @OneToOne
     private Student student;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

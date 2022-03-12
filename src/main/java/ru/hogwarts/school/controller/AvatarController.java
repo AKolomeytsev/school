@@ -29,13 +29,13 @@ public class AvatarController {
     }
 
     @PostMapping(value = "/{Id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> uploadAvatar(@PathVariable PageRequest Id, @RequestParam MultipartFile avatar) throws IOException {
+    public ResponseEntity<String> uploadAvatar(@PathVariable Long Id, @RequestParam MultipartFile avatar) throws IOException {
         avatarService.uploadAvatar(Id, avatar);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/{id}/avatar-from-db")
-    public ResponseEntity<byte[]> downloadAvatar(@PathVariable PageRequest id) {
+    public ResponseEntity<byte[]> downloadAvatar(@PathVariable Long id) {
         Avatar avatar = avatarService.findAvatar(id);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
@@ -44,7 +44,7 @@ public class AvatarController {
     }
 
     @GetMapping(value = "/{id}/avatar-from-file")
-    public void downloadAvatar(@PathVariable PageRequest id, HttpServletResponse response) throws IOException{
+    public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException{
         Avatar avatar = avatarService.findAvatar(id);
         Path path = Path.of(avatar.getFilePath());
         try(InputStream is = Files.newInputStream(path);
@@ -56,9 +56,9 @@ public class AvatarController {
         }
     }
 
-    @GetMapping(value = "/avatars")
-    public List<Avatar> getAvatars(@PathVariable Integer page, Integer size) {
-       return avatarService.findAll(page,size);
+    @GetMapping("/avatars/")
+    public List<Avatar> getAvatars(@RequestParam(value = "PageNumber") Integer page, @RequestParam(value = "PageSize") Integer size) {
+       return avatarService.findAll(page-1,size);
 
     }
 }

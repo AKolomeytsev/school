@@ -19,7 +19,7 @@ public class StudentService {
         return repositoryStudent.save(student);
     }
 
-    public Student getStudent(PageRequest id){
+    public Student getStudent(Long id){
         return repositoryStudent.findById(id).get();
     }
 

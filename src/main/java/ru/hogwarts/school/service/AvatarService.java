@@ -19,6 +19,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 public class AvatarService {
     private final RepositoryAvatar repositoryAvatar;
     private final StudentService studentService;
+    private Avatar avatar;
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
@@ -27,7 +28,7 @@ public class AvatarService {
         this.studentService = studentService;
     }
 
-    public void uploadAvatar(PageRequest studentId, MultipartFile avatarFile) throws IOException {
+    public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
         Student student = studentService.getStudent(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(avatarFile.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
@@ -40,7 +41,7 @@ public class AvatarService {
         ) {
             bis.transferTo(bos);
         }
-        Avatar avatar = new Avatar();
+        //Avatar avatar = new Avatar();
         avatar = findAvatar(studentId);
         avatar.setStudent(student);
         avatar.setFilePath(filePath.toString());
@@ -53,8 +54,13 @@ public class AvatarService {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-    public Avatar findAvatar(PageRequest id){
-        return repositoryAvatar.findAvatarById(id);
+    public Avatar findAvatar(Long id){
+        Avatar avatar = repositoryAvatar.findAvatarByStudent((long)id);
+        if(avatar != null){
+            return repositoryAvatar.findById(avatar.getId()).get();
+        }else{
+            return new Avatar();
+        }
     }
 
     public List<Avatar> findAll(int page,int size){
