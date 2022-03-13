@@ -55,9 +55,9 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(Long id){
-        Avatar avatar = repositoryAvatar.findAvatarByStudent((long)id);
-        if(avatar != null){
-            return repositoryAvatar.findById(avatar.getId()).get();
+        Long avatarId = repositoryAvatar.getIdByStudentId(id);
+        if(avatarId != null){
+            return repositoryAvatar.findById(avatarId).get();
         }else{
             return new Avatar();
         }

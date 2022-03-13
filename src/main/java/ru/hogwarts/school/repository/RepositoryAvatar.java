@@ -12,4 +12,6 @@ import java.util.List;
 public interface RepositoryAvatar extends PagingAndSortingRepository<Avatar,Long> {
     Avatar findAvatarById(Long id);
     Avatar findAvatarByStudent(Long id);
+    @Query(value = "SELECT id FROM avatar where student_id = ?1",nativeQuery = true)
+    Long getIdByStudentId(Long id);
 }
