@@ -1,0 +1,6 @@
+ALTER TABLE student DROP COLUMN age;
+ALTER TABLE student add COLUMN age INTEGER CHECK (age > 16) DEFAULT 20;
+ALTER TABLE student DROP COLUMN name;
+ALTER TABLE student add COLUMN name VARCHAR(255) UNIQUE NOT NULL;
+
+ALTER TABLE faculty ADD CONSTRAINT login_pass_unique UNIQUE (name, color);
