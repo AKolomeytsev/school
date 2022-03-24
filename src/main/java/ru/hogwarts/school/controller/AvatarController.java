@@ -61,4 +61,9 @@ public class AvatarController {
        return avatarService.findAll(page-1,size);
 
     }
+
+    @GetMapping("/generate/")
+    public int  sumGenerate(){
+        return avatarService.sumGenerate();
+    }
 }

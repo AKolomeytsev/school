@@ -6,6 +6,9 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("faculty")
@@ -47,5 +50,11 @@ public class FacultyController {
     public ResponseEntity<Collection<Faculty>> findFacultyByNameIgnoreCaseContains(String name){
         Collection<Faculty> faculties = facultyService.findByNameIgnoreCaseContains(name);
         return ResponseEntity.ok(faculties);
+    }
+
+    @GetMapping(path = "maxLenName")
+    public ResponseEntity<Optional<Map.Entry<Integer, List<String>>>> getMaxLenName(){
+        Optional<Map.Entry<Integer, List<String>>> facultName = facultyService.getMaxLenName();
+        return ResponseEntity.ok(facultName);
     }
 }

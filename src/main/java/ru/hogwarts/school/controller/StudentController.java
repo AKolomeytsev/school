@@ -64,4 +64,15 @@ public class StudentController {
         Collection<Student> students = studentService.getFiveLastStudent();
         return ResponseEntity.ok(students);
     }
+
+    @GetMapping(path = "filter/{chr}")
+    public ResponseEntity<Collection<String>> getStudentAge(@PathVariable String chr){
+        Collection<String> students = studentService.getStudentByFirstLetter(chr);
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping(path = "AvgAgeStudentStream")
+    public int getAgeStudentStream(){
+        return studentService.getAgeStudentStream();
+    }
 }

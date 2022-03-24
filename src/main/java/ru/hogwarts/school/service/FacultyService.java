@@ -5,6 +5,10 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.RepositoryFaculty;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FacultyService {
@@ -36,5 +40,10 @@ public class FacultyService {
 
     public Collection<Faculty> findByNameIgnoreCaseContains(String name){
         return (Collection<Faculty>) repositoryFaculty.findByNameIgnoreCaseContains(name);
+    }
+
+    public Optional<Map.Entry<Integer, List<String>>> getMaxLenName() {
+        Collection<Faculty> faculties = repositoryFaculty.findAllBy();
+        return faculties.stream().map(Faculty::getName).collect(Collectors.groupingBy(String::length)).entrySet().stream().max(Map.Entry.comparingByKey());
     }
 }

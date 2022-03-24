@@ -12,6 +12,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -22,6 +25,8 @@ public class AvatarService {
     private Avatar avatar;
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
+
+    private Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     public AvatarService(RepositoryAvatar repositoryAvatar, StudentService studentService) {
         this.repositoryAvatar = repositoryAvatar;
@@ -66,5 +71,12 @@ public class AvatarService {
     public List<Avatar> findAll(int page,int size){
         PageRequest pageRequest = PageRequest.of(page, size);
         return repositoryAvatar.findAll(pageRequest).getContent();
+    }
+
+    public int sumGenerate() {
+        logger.info(String.valueOf(System.currentTimeMillis()));
+        int sum = Stream.iterate(1, a -> a +1).limit(1_000_000).parallel().reduce(0, (a, b) -> a + b );
+        logger.info(String.valueOf(System.currentTimeMillis()));
+       return sum;
     }
 }

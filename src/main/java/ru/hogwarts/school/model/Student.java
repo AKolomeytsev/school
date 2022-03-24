@@ -9,15 +9,15 @@ public class Student {
     @Id
     @GeneratedValue
     private Long id;
-    private String nane;
+    private String name;
     private int age;
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    public Student(long id, String nane, int age, int faculty) {
+    public Student(long id, String name, int age, int faculty) {
         this.id = id;
-        this.nane = nane;
+        this.name = name;
         this.age = age;
     }
 
@@ -33,12 +33,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getNane() {
-        return nane;
+    public String getName() {
+        return name;
     }
 
-    public void setNane(String nane) {
-        this.nane = nane;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {

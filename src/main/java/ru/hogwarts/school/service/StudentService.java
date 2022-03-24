@@ -1,6 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.RepositoryStudent;
@@ -49,5 +48,20 @@ public class StudentService {
 
     public Collection<Student> getFiveLastStudent(){
         return repositoryStudent.getFiveLastStudent();
+    }
+
+    public Collection<String> getStudentByFirstLetter(String chr){
+        Collection<Student> students = repositoryStudent.findAll();
+        return students.stream().map(Student::getName).filter(s -> s.substring(0,1).toUpperCase().equals(chr.toUpperCase())).map(s -> s.toUpperCase()).sorted().toList();
+    }
+
+    public int getAgeStudentStream() {
+        Collection<Student> students = repositoryStudent.findAll();
+        int count = students.size();
+        return (int)students.stream().reduce(0,(x,y)->{
+            x += y.getAge();
+            return x;
+        },
+                (x,y)->x)/count;
     }
 }
