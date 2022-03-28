@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,12 +25,15 @@ public class AvatarService {
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
+    private Logger logger = LoggerFactory.getLogger(AvatarService.class);
+
     public AvatarService(RepositoryAvatar repositoryAvatar, StudentService studentService) {
         this.repositoryAvatar = repositoryAvatar;
         this.studentService = studentService;
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
+        logger.info("Был вызван метод загрузи файла для студента, ID = {}",studentId);
         Student student = studentService.getStudent(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(avatarFile.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
@@ -41,7 +46,6 @@ public class AvatarService {
         ) {
             bis.transferTo(bos);
         }
-        //Avatar avatar = new Avatar();
         avatar = findAvatar(studentId);
         avatar.setStudent(student);
         avatar.setFilePath(filePath.toString());
@@ -55,6 +59,7 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(Long id){
+        logger.info("Был вызван метод поиска аватарки для студента ID = {}",id);
         Long avatarId = repositoryAvatar.getIdByStudentId(id);
         if(avatarId != null){
             return repositoryAvatar.findById(avatarId).get();

@@ -34,7 +34,7 @@ public class SchoolApplicationStudentTests {
     void initTestData() {
         student = new Student();
         student.setId(1L);
-        student.setNane("student10");
+        student.setName("student10");
         student.setAge(39);
     }
 
