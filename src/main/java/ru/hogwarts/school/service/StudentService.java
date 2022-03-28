@@ -25,27 +25,27 @@ public class StudentService {
     }
 
     public Student getStudent(Long id){
-        logger.info("Был вызван метод поиска студента по ID");
+        logger.info("Был вызван метод поиска студента по ID = {}",id);
         return repositoryStudent.findById(id).get();
     }
 
     public Student updateStudent(Student student){
-        logger.info("Был вызван метод редактирования информации о студенте");
+        logger.info("Был вызван метод редактирования информации о студенте {}",student);
         return repositoryStudent.save(student);
     }
 
     public void deleteStudent(Long id){
-        logger.info("Был вызван метод удаления информации о студенте по ID");
+        logger.info("Был вызван метод удаления информации о студенте по ID {}",id);
         repositoryStudent.deleteById(id);
     }
 
     public Collection<Student> getStudentsAge(int age){
-        logger.info("Был вызван метод получения списка студентов по возрасту");
+        logger.info("Был вызван метод получения списка студентов по возрасту = {}",age);
         return repositoryStudent.findByAge(age);
     }
 
     public Collection<Student> findByAgeBetween(int minAge, int maxAge){
-        logger.info("Был вызван метод получения списка студентов по возрасту в промежутке");
+        logger.info("Был вызван метод получения списка студентов по возрасту в промежутке c {} по {}",minAge,maxAge);
         return repositoryStudent.findByAgeBetween(minAge,maxAge);
     }
 

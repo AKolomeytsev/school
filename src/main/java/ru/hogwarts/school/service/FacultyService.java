@@ -24,27 +24,27 @@ public class FacultyService {
     }
 
     public Faculty getFaculty(Long id){
-        logger.info("Был вызван метод поиска факультета по ID");
+        logger.info("Был вызван метод поиска факультета по ID = {}",id);
         return repositoryFaculty.findById(id).get();
     }
 
     public Faculty updateFaculty(Faculty faculty){
-        logger.info("Был вызван метод редактирования данных факультета");
+        logger.info("Был вызван метод редактирования данных факультета {}",faculty);
         return repositoryFaculty.save(faculty);
     }
 
     public void deleteFaculty(Long id){
-        logger.info("Был вызван метод удаления факультета по ID");
+        logger.info("Был вызван метод удаления факультета по ID = {}",id);
         repositoryFaculty.deleteById(id);
     }
 
     public Collection<Faculty> findByColorIgnoreCaseContains(String color){
-        logger.info("Был вызван метод получения списка факультетов по цвету");
+        logger.info("Был вызван метод получения списка факультетов по цвету = {}",color);
         return (Collection<Faculty>) repositoryFaculty.findByColorIgnoreCaseContains(color);
     }
 
     public Collection<Faculty> findByNameIgnoreCaseContains(String name){
-        logger.info("Был вызван метод поиска факультета по названию");
+        logger.info("Был вызван метод поиска факультета по названию = {}",name);
         return (Collection<Faculty>) repositoryFaculty.findByNameIgnoreCaseContains(name);
     }
 }

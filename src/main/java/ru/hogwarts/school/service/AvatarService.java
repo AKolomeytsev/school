@@ -33,7 +33,7 @@ public class AvatarService {
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
-        logger.info("Был вызван метод загрузи файла");
+        logger.info("Был вызван метод загрузи файла для студента, ID = {}",studentId);
         Student student = studentService.getStudent(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(avatarFile.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
@@ -59,7 +59,7 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(Long id){
-        logger.info("Был вызван метод поиска аватарки");
+        logger.info("Был вызван метод поиска аватарки для студента ID = {}",id);
         Long avatarId = repositoryAvatar.getIdByStudentId(id);
         if(avatarId != null){
             return repositoryAvatar.findById(avatarId).get();
