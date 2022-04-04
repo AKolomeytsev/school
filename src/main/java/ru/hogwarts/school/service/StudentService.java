@@ -5,6 +5,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.RepositoryStudent;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -63,5 +64,64 @@ public class StudentService {
             return x;
         },
                 (x,y)->x)/count;
+    }
+
+    public void getStudentsSomeStreams() {
+        List<Student> students = repositoryStudent.findAll();
+        printStudent(students.get(0));
+        printStudent(students.get(1));
+
+        Thread thread1 = new Thread() {
+            @Override
+            public void run() {
+                printStudent(students.get(2));
+                printStudent(students.get(3));
+
+            }
+        };
+
+        Thread thread2 = new Thread() {
+            @Override
+            public void run() {
+                printStudent(students.get(4));
+                printStudent(students.get(5));
+            }
+        };
+        thread1.start();
+        thread2.start();
+
+
+    }
+    public void printStudent(Student student) {
+        System.out.println(student.toString());
+    }
+    public synchronized void printSynchStudent(Student student) {
+
+        System.out.println(student.toString());
+    }
+
+    public void getStudentsSomeSynhStreams() {
+        List<Student> students = repositoryStudent.findAll();
+        printSynchStudent(students.get(0));
+        printSynchStudent(students.get(1));
+
+        Thread thread1 = new Thread() {
+            @Override
+            public void run() {
+                printSynchStudent(students.get(2));
+                printSynchStudent(students.get(3));
+
+            }
+        };
+
+        Thread thread2 = new Thread() {
+            @Override
+            public void run() {
+                printSynchStudent(students.get(4));
+                printSynchStudent(students.get(5));
+            }
+        };
+        thread1.start();
+        thread2.start();
     }
 }

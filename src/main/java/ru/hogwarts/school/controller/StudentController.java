@@ -75,4 +75,16 @@ public class StudentController {
     public int getAgeStudentStream(){
         return studentService.getAgeStudentStream();
     }
+
+    @GetMapping(path = "SomeStreams")
+    public void getStudentsSomeStreams(){
+        studentService.getStudentsSomeStreams();
+    }
+
+    @GetMapping(path = "SomeSynchStreams")
+    public void getStudentsSomeSynchStreams(){
+        studentService.getStudentsSomeSynhStreams();
+    }
+
+
 }

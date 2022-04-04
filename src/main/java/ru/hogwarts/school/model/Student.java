@@ -5,7 +5,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Student {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -47,5 +46,15 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", faculty=" + faculty +
+                '}';
     }
 }
